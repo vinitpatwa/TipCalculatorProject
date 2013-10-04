@@ -42,71 +42,54 @@ public class MainActivity extends Activity {
     //if it's not null
     //call method calculate tip and set value of TextView with tip value
 
-
-        public void onClickBtnTen(View v){
-
-            if(et.getText().toString().isEmpty() || et.getText().toString() == null){
-                //editText is empty, don't do anything
-            }else{
-                int amtAdded = Integer.parseInt(et.getText().toString());
-                this.calculateTip(amtAdded, 10);
-
-            }
-        }
-
-
-        public void onClickBtnTwenty(View v){
-
-            if(et.getText().toString().isEmpty() || et.getText().toString() == null){
-                //editText is empty, don't do anything
-            }else{
-                int amtAdded = Integer.parseInt(et.getText().toString());
-                this.calculateTip(amtAdded, 20);
-
-            }
-        }
-
-
-    public void onClickBtnThirty(View v){
+    public void onClickBtn(View v){
 
         if(et.getText().toString().isEmpty()|| et.getText().toString() == null){
             //editText is empty, don't do anything
         }else{
             int amtAdded = Integer.parseInt(et.getText().toString());
-            this.calculateTip(amtAdded, 30);
-
+            switch (v.getId()){
+                case R.id.btnthirty:
+                    this.calculateTip(amtAdded, 30);
+                    break;
+                case R.id.btntwenty:
+                    this.calculateTip(amtAdded, 20);
+                    break;
+                case R.id.btnten:
+                    this.calculateTip(amtAdded, 10);
+                    break;
+                default:
+                    this.calculateTip(amtAdded, 10);
+                    break;
+            }
         }
     }
 
-    public void onClickSplitFour(View v){
-        int perPersonTotal = grandTotal/4;
-        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
-        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
-    }
+    public void onClickSplit(View v){
 
-    public void onClickSplitThree(View v){
-        int perPersonTotal = grandTotal/3;
-        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
-        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
-    }
-    public void onClickSplitTwo(View v){
-        int perPersonTotal = grandTotal/2;
-        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
-        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
-    }
-    public void onClickSplitOne(View v){
-        int perPersonTotal = grandTotal/1;
-        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
-        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
-    }
+        int perPersonTotal = 1;
+        switch (v.getId()){
+            case R.id.btSplitFour:
+                perPersonTotal = grandTotal/4;
+                break;
+            case R.id.btSplitThree:
+                perPersonTotal = grandTotal/3;
+                break;
+            case R.id.btSplitTwo:
+                perPersonTotal = grandTotal/2;
+                break;
+            default:
+                perPersonTotal = grandTotal/1;
+                break;
+        }
 
-
+        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
+        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
+    }
 
     public void calculateTip(int amtAdded, int tipvalue){
-
-
-         totalTip =  amtAdded * tipvalue/100;
-         grandTotal = amtAdded + totalTip;
+        totalTip =  amtAdded * tipvalue/100;
+        grandTotal = amtAdded + totalTip;
         tvtip.setText("Tip is:   ".concat(Integer.toString(totalTip)));
         tvGrandTotal.setText("Grand Total is:  ".concat(Integer.toString(grandTotal)));
     }

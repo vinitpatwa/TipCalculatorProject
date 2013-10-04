@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="@string/Btnten"
         android:id="@+id/btnten"
-        android:onClick="onClickBtnTen"
+        android:onClick="onClickBtn"
         android:layout_alignTop="@+id/btntwenty"
         android:layout_alignParentLeft="true" />
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btntwenty"
         android:id="@+id/btntwenty"
-        android:onClick="onClickBtnTwenty"
+        android:onClick="onClickBtn"
         android:layout_alignTop="@+id/btnthirty"
         android:layout_toRightOf="@+id/btnten" />
 
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btnthirty"
         android:id="@+id/btnthirty"
-        android:onClick="onClickBtnThirty"
+        android:onClick="onClickBtn"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/btntwenty" />
 
@@ -102,7 +102,7 @@
         android:id="@+id/btSplitOne"
         android:layout_below="@id/tvSplitLabel"
         android:layout_alignParentLeft="true"
-        android:onClick="onClickSplitOne"/>
+        android:onClick="onClickSplit"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -112,7 +112,7 @@
         android:id="@+id/btSplitTwo"
         android:layout_below="@id/tvSplitLabel"
         android:layout_toRightOf="@+id/btSplitOne"
-        android:onClick="onClickSplitTwo"
+        android:onClick="onClickSplit"
         />
 
     <Button
@@ -123,7 +123,7 @@
         android:id="@+id/btSplitThree"
         android:layout_below="@id/tvSplitLabel"
         android:layout_toRightOf="@+id/btSplitTwo"
-        android:onClick="onClickSplitThree"/>
+        android:onClick="onClickSplit"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -131,9 +131,9 @@
         android:layout_height="wrap_content"
         android:text="@string/btSplitFour"
         android:id="@+id/btSplitFour"
-        android:layout_below="@id/tvSplitLabel"
-        android:layout_alignLeft="@+id/tiplabel"
-        android:onClick="onClickSplitFour"/>
+        android:onClick="onClickSplit"
+        android:layout_above="@+id/tvAfterSplitPerPerson"
+        android:layout_alignRight="@+id/btnthirty" />
 
     <EditText
         android:layout_width="wrap_content"
