@@ -12,6 +12,10 @@ public class MainActivity extends Activity {
 
     EditText et;
     TextView tvtip;
+    TextView tvGrandTotal;
+    int totalTip  ;
+    int grandTotal;
+    TextView tvAfterSplitPerPerson;
 
 
     @Override
@@ -20,6 +24,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         et =(EditText) findViewById(R.id.editText);
         tvtip = (TextView) findViewById(R.id.tiplabel);
+        tvGrandTotal = (TextView) findViewById(R.id.tvGrandTotal);
+        tvAfterSplitPerPerson = (TextView) findViewById(R.id.tvAfterSplitPerPerson);
 
     }
 
@@ -72,12 +78,37 @@ public class MainActivity extends Activity {
         }
     }
 
+    public void onClickSplitFour(View v){
+        int perPersonTotal = grandTotal/4;
+        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
+        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
+    }
+
+    public void onClickSplitThree(View v){
+        int perPersonTotal = grandTotal/3;
+        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
+        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
+    }
+    public void onClickSplitTwo(View v){
+        int perPersonTotal = grandTotal/2;
+        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
+        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
+    }
+    public void onClickSplitOne(View v){
+        int perPersonTotal = grandTotal/1;
+        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
+        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
+    }
+
+
+
     public void calculateTip(int amtAdded, int tipvalue){
 
 
-        int totalTip =  amtAdded * tipvalue/100;
+         totalTip =  amtAdded * tipvalue/100;
+         grandTotal = amtAdded + totalTip;
         tvtip.setText("Tip is:   ".concat(Integer.toString(totalTip)));
-
+        tvGrandTotal.setText("Grand Total is:  ".concat(Integer.toString(grandTotal)));
     }
 
 

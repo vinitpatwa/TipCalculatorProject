@@ -3,6 +3,6 @@
 
     <string name="app_name">Tip Calculator</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string><string name="tipLabel">Tip is:</string><string name="Btnten">10%</string><string name="btntwenty">20%</string><string name="btnthirty">30%</string>
+    <string name="hello_world">Hello world!</string><string name="tipLabel">Tip is:</string><string name="Btnten">10%</string><string name="btntwenty">20%</string><string name="btnthirty">30%</string><string name="etTipAmountHint">Other</string><string name="tvGrandTotal">Grand Total is:</string><string name="tvSplitLabel">Split</string><string name="btSplitOne">1</string><string name="btSplitTwo">2</string><string name="btSplitThree">3</string><string name="btSplitFour">4</string><string name="tvAfterSplitPerPerson">Person Grand Total is:</string>
 
 </resources>
