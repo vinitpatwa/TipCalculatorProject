@@ -24,6 +24,7 @@
         android:ems="10"
         android:id="@+id/editText"
         android:layout_alignParentTop="true"
+        android:imeOptions="actionDone"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp" />
 
@@ -69,7 +70,8 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/etTipOther"
+        android:imeOptions="actionDone"
         android:hint="@string/etTipAmountHint"
         android:layout_alignBottom="@+id/btnthirty"
         android:layout_toRightOf="@+id/btnthirty"
@@ -142,6 +144,7 @@
         android:ems="10"
         android:id="@+id/etSplitOther"
         android:hint="@string/etTipAmountHint"
+        android:imeOptions="actionDone"
         android:layout_alignBottom="@+id/btSplitFour"
         android:layout_toRightOf="@+id/btSplitFour"
         android:layout_alignParentRight="true" />

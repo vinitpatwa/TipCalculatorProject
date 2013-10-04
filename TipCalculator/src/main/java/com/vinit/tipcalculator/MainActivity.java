@@ -3,7 +3,9 @@ package com.vinit.tipcalculator;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
@@ -14,8 +16,10 @@ public class MainActivity extends Activity {
     TextView tvtip;
     TextView tvGrandTotal;
     int totalTip  ;
-    int grandTotal;
+    int grandTotal = 0;
     TextView tvAfterSplitPerPerson;
+    EditText etTipOther;
+    EditText etSplitOther;
 
 
     @Override
@@ -26,6 +30,11 @@ public class MainActivity extends Activity {
         tvtip = (TextView) findViewById(R.id.tiplabel);
         tvGrandTotal = (TextView) findViewById(R.id.tvGrandTotal);
         tvAfterSplitPerPerson = (TextView) findViewById(R.id.tvAfterSplitPerPerson);
+        etTipOther = (EditText) findViewById(R.id.etTipOther);
+        etTipOther.setOnEditorActionListener(new DoneOnEditorActionListener());
+
+        etSplitOther = (EditText) findViewById(R.id.etSplitOther);
+        etSplitOther.setOnEditorActionListener(new DoneOnEditorActionListener());
 
     }
 
@@ -67,25 +76,37 @@ public class MainActivity extends Activity {
 
     public void onClickSplit(View v){
 
-        int perPersonTotal = 1;
+        int noOfPeople = 1;
         switch (v.getId()){
             case R.id.btSplitFour:
-                perPersonTotal = grandTotal/4;
+                this.calculateSplit(4);
+ //               perPersonTotal = grandTotal/4;
                 break;
             case R.id.btSplitThree:
-                perPersonTotal = grandTotal/3;
+                this.calculateSplit(3);
+   //             perPersonTotal = grandTotal/3;
                 break;
             case R.id.btSplitTwo:
-                perPersonTotal = grandTotal/2;
+                this.calculateSplit(4);
+                //perPersonTotal = grandTotal/2;
                 break;
             default:
-                perPersonTotal = grandTotal/1;
+                this.calculateSplit(noOfPeople);
+                //perPersonTotal = grandTotal/1;
                 break;
         }
 
+//        String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
+//        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
+    }
+
+    public void calculateSplit( int noOfPeople){
+        int perPersonTotal = 0;
+        perPersonTotal = grandTotal/noOfPeople;
         String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
         tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
     }
+
 
     public void calculateTip(int amtAdded, int tipvalue){
         totalTip =  amtAdded * tipvalue/100;
@@ -96,4 +117,27 @@ public class MainActivity extends Activity {
 
 
 
+    class DoneOnEditorActionListener implements TextView.OnEditorActionListener{
+
+        @Override
+        public boolean onEditorAction(TextView v, int i, KeyEvent keyEvent) {
+            if(i == EditorInfo.IME_ACTION_DONE){
+                if(v.getId() == R.id.etTipOther){
+
+                    String etOtherValue = v.getText().toString();
+                    Log.w("etOtherValue", etOtherValue);
+                    int amtAdded = Integer.parseInt(et.getText().toString());
+                    calculateTip(amtAdded, Integer.parseInt(etOtherValue));
+                }else if(v.getId() == R.id.etSplitOther){
+                    String etSplitOther = v.getText().toString();
+                    Log.w("etSplitOther", etSplitOther);
+                    calculateSplit(Integer.parseInt(etSplitOther));
+                }else{
+                    //Do Nothing
+                    Log.w("DoNothing", "DoNothing");
+                }
+            }
+            return false;
+        }
+    }
 }
