@@ -15,8 +15,8 @@ public class MainActivity extends Activity {
     EditText et;
     TextView tvtip;
     TextView tvGrandTotal;
-    int totalTip = 0 ;
-    int grandTotal = 0;
+    Double totalTip = 0.0 ;
+    Double grandTotal = 0.0;
     TextView tvAfterSplitPerPerson;
     EditText etTipOther;
     EditText etSplitOther;
@@ -56,20 +56,20 @@ public class MainActivity extends Activity {
         if(et.getText().toString().isEmpty()|| et.getText().toString() == null){
             //editText is empty, don't do anything
         }else{
-            int amtAdded = getInteger(et.getText().toString()) ;
+            Double amtAdded = getDouble(et.getText().toString()) ;
 //                    Integer.parseInt(et.getText().toString());
             switch (v.getId()){
                 case R.id.btnthirty:
-                    this.calculateTip(amtAdded, 30);
+                    this.calculateTip(amtAdded, 30.0);
                     break;
                 case R.id.btntwenty:
-                    this.calculateTip(amtAdded, 20);
+                    this.calculateTip(amtAdded, 20.0);
                     break;
                 case R.id.btnten:
-                    this.calculateTip(amtAdded, 10);
+                    this.calculateTip(amtAdded, 10.0);
                     break;
                 default:
-                    this.calculateTip(amtAdded, 10);
+                    this.calculateTip(amtAdded, 10.0);
                     break;
             }
         }
@@ -80,19 +80,19 @@ public class MainActivity extends Activity {
         int noOfPeople = 1;
         switch (v.getId()){
             case R.id.btSplitFour:
-                this.calculateSplit(4);
+                this.calculateSplit(Long.valueOf(4));
  //               perPersonTotal = grandTotal/4;
                 break;
             case R.id.btSplitThree:
-                this.calculateSplit(3);
+                this.calculateSplit(Long.valueOf(3));
    //             perPersonTotal = grandTotal/3;
                 break;
             case R.id.btSplitTwo:
-                this.calculateSplit(4);
+                this.calculateSplit(Long.valueOf(2));
                 //perPersonTotal = grandTotal/2;
                 break;
             default:
-                this.calculateSplit(noOfPeople);
+                this.calculateSplit((Long.valueOf(noOfPeople)));
                 //perPersonTotal = grandTotal/1;
                 break;
         }
@@ -101,29 +101,29 @@ public class MainActivity extends Activity {
 //        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
     }
 
-    public void calculateSplit( int noOfPeople){
-        int perPersonTotal = 0;
+    public void calculateSplit( Long noOfPeople){
+        Double perPersonTotal = 0.0;
         if(noOfPeople <=0){
-            noOfPeople = 1;
+            noOfPeople = (Long.valueOf(1));
         }
         perPersonTotal = grandTotal/noOfPeople;
         String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
-        tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
+        tvAfterSplitPerPerson.setText(curBtText.concat(Double.toString(Math.round(perPersonTotal*100)/100)));
     }
 
 
-    public void calculateTip(int amtAdded, int tipvalue){
+    public void calculateTip(Double amtAdded, Double tipvalue){
         totalTip =  amtAdded * tipvalue/100;
         grandTotal = amtAdded + totalTip;
-        tvtip.setText("Tip is:   ".concat(Integer.toString(totalTip)));
-        tvGrandTotal.setText("Grand Total is:  ".concat(Integer.toString(grandTotal)));
+        tvtip.setText("Tip is:   ".concat(Double.toString(Math.round(totalTip*100)/100)));
+        tvGrandTotal.setText("Grand Total is:  ".concat(Double.toString(Math.round(grandTotal*100)/100)));
     }
 
-    private static Integer getInteger(String str) {
+    private static Double getDouble(String str) {
         if (str == null || str.equals("")) {
-            return new Integer(0);
+            return new Double(0.0);
         } else {
-            return Integer.parseInt(str);
+            return Double.parseDouble(str);
         }
     }
 
@@ -137,7 +137,7 @@ public class MainActivity extends Activity {
                     String etOtherValue = v.getText().toString();
                     Log.w("etOtherValue", etOtherValue);
                     Log.w("\netgetText", "*".concat(et.getText().toString()).concat("*\n"));
-                    int amtAdded = getInteger(et.getText().toString());
+                    Double amtAdded = getDouble(et.getText().toString());
                             //Integer.parseInt(et.getText().toString());
 //                    if(amtAdded < 0){
 //                        amtAdded = 0;
@@ -145,11 +145,11 @@ public class MainActivity extends Activity {
 //                    if(amtAdded < 0){
 //                        amtAdded = 0;
 //                    }
-                    calculateTip(amtAdded, getInteger(etOtherValue));
+                    calculateTip(amtAdded, getDouble(etOtherValue));
                 }else if(v.getId() == R.id.etSplitOther){
                     String etSplitOther = v.getText().toString();
                     Log.w("etSplitOther", etSplitOther);
-                    calculateSplit(getInteger(etSplitOther));
+                    calculateSplit(Long.parseLong(etSplitOther));
                 }else{
                     //Do Nothing
                     Log.w("DoNothing", "DoNothing");
