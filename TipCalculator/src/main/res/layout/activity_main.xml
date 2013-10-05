@@ -26,7 +26,8 @@
         android:layout_alignParentTop="true"
         android:imeOptions="actionDone"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp" />
+        android:layout_marginTop="49dp"
+        android:hint="@string/editTextHint" />
 
     <Button
         android:layout_width="wrap_content"
@@ -34,8 +35,9 @@
         android:text="@string/Btnten"
         android:id="@+id/btnten"
         android:onClick="onClickBtn"
-        android:layout_alignTop="@+id/btntwenty"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignBaseline="@+id/btntwenty"
+        android:layout_alignBottom="@+id/btntwenty"
+        android:layout_alignLeft="@id/tvSplitLabel" />
 
     <Button
         android:layout_width="wrap_content"
@@ -63,6 +65,7 @@
         android:id="@+id/tvPercentage"
         android:textSize="30sp"
         android:layout_alignTop="@+id/editText3"
+        android:layout_alignBottom="@+id/btnthirty"
         android:layout_alignParentRight="true" />
 
     <EditText

@@ -15,7 +15,7 @@ public class MainActivity extends Activity {
     EditText et;
     TextView tvtip;
     TextView tvGrandTotal;
-    int totalTip  ;
+    int totalTip = 0 ;
     int grandTotal = 0;
     TextView tvAfterSplitPerPerson;
     EditText etTipOther;
@@ -56,7 +56,8 @@ public class MainActivity extends Activity {
         if(et.getText().toString().isEmpty()|| et.getText().toString() == null){
             //editText is empty, don't do anything
         }else{
-            int amtAdded = Integer.parseInt(et.getText().toString());
+            int amtAdded = getInteger(et.getText().toString()) ;
+//                    Integer.parseInt(et.getText().toString());
             switch (v.getId()){
                 case R.id.btnthirty:
                     this.calculateTip(amtAdded, 30);
@@ -102,6 +103,9 @@ public class MainActivity extends Activity {
 
     public void calculateSplit( int noOfPeople){
         int perPersonTotal = 0;
+        if(noOfPeople <=0){
+            noOfPeople = 1;
+        }
         perPersonTotal = grandTotal/noOfPeople;
         String curBtText = getResources().getString(R.string.tvAfterSplitPerPerson);
         tvAfterSplitPerPerson.setText(curBtText.concat(Integer.toString(perPersonTotal)));
@@ -115,7 +119,13 @@ public class MainActivity extends Activity {
         tvGrandTotal.setText("Grand Total is:  ".concat(Integer.toString(grandTotal)));
     }
 
-
+    private static Integer getInteger(String str) {
+        if (str == null || str.equals("")) {
+            return new Integer(0);
+        } else {
+            return Integer.parseInt(str);
+        }
+    }
 
     class DoneOnEditorActionListener implements TextView.OnEditorActionListener{
 
@@ -126,12 +136,20 @@ public class MainActivity extends Activity {
 
                     String etOtherValue = v.getText().toString();
                     Log.w("etOtherValue", etOtherValue);
-                    int amtAdded = Integer.parseInt(et.getText().toString());
-                    calculateTip(amtAdded, Integer.parseInt(etOtherValue));
+                    Log.w("\netgetText", "*".concat(et.getText().toString()).concat("*\n"));
+                    int amtAdded = getInteger(et.getText().toString());
+                            //Integer.parseInt(et.getText().toString());
+//                    if(amtAdded < 0){
+//                        amtAdded = 0;
+//                    }
+//                    if(amtAdded < 0){
+//                        amtAdded = 0;
+//                    }
+                    calculateTip(amtAdded, getInteger(etOtherValue));
                 }else if(v.getId() == R.id.etSplitOther){
                     String etSplitOther = v.getText().toString();
                     Log.w("etSplitOther", etSplitOther);
-                    calculateSplit(Integer.parseInt(etSplitOther));
+                    calculateSplit(getInteger(etSplitOther));
                 }else{
                     //Do Nothing
                     Log.w("DoNothing", "DoNothing");
